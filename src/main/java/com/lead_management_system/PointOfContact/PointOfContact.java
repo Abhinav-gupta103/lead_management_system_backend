@@ -4,9 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lead_management_system.RestaurantLeads.RestaurantLeads;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "points_of_contact")
+@Getter
+@Setter
+@NoArgsConstructor
 public class PointOfContact {
 
     @Id
@@ -27,46 +33,4 @@ public class PointOfContact {
     @JsonIgnore
     private RestaurantLeads restaurant;
 
-    public PointOfContact() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
-    public RestaurantLeads getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(RestaurantLeads restaurant) {
-        this.restaurant = restaurant;
-    }
 }

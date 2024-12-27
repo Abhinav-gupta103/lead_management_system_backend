@@ -1,6 +1,10 @@
 package com.lead_management_system.RestaurantLeads;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,6 +14,9 @@ import com.lead_management_system.PointOfContact.PointOfContact;
 
 @Entity
 @Table(name = "restaurant_leads")
+@Getter
+@Setter
+@NoArgsConstructor
 public class RestaurantLeads {
 
     @Id
@@ -49,64 +56,4 @@ public class RestaurantLeads {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
-
-    public RestaurantLeads() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public LeadStatus getLeadStatus() {
-        return leadStatus;
-    }
-
-    public void setLeadStatus(LeadStatus leadStatus) {
-        this.leadStatus = leadStatus;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public List<PointOfContact> getPointsOfContact() {
-        return pointsOfContact;
-    }
-
-    public void setPointsOfContact(List<PointOfContact> pointsOfContact) {
-        this.pointsOfContact = pointsOfContact;
-    }
-
 }

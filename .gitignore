@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+.env
+src/main/java/com/lead_management_system/.DS_Store
