@@ -52,7 +52,7 @@ public class SecurityConfig {
                 session -> session.sessionCreationPolicy(
                         SessionCreationPolicy.STATELESS));
         http.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
-        // http.httpBasic(withDefaults());
+
         http.headers(headers -> headers
                 .frameOptions(frameOptions -> frameOptions
                         .sameOrigin()));
@@ -77,7 +77,6 @@ public class SecurityConfig {
                     .roles("USER")
                     .build();
             UserDetails admin = User.withUsername("admin")
-                    // .password(passwordEncoder().encode("adminPass"))
                     .password(passwordEncoder().encode("adminPass"))
                     .roles("ADMIN")
                     .build();
@@ -102,15 +101,15 @@ public class SecurityConfig {
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:3000"); // Frontend URL
+        config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("DELETE");
         config.addAllowedHeader("Authorization");
         config.addAllowedHeader("Content-Type");
-        config.setAllowCredentials(true); // Allow credentials like cookies or Authorization headers
-        source.registerCorsConfiguration("/**", config); // Apply CORS to all routes
+        config.setAllowCredentials(true);
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
 }
