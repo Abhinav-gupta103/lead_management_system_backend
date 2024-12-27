@@ -1,4 +1,4 @@
-package com.lead_management_system.RestaurantLeads;
+package com.lead_management_system.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lead_management_system.Interaction.Interaction;
-import com.lead_management_system.PointOfContact.PointOfContact;
+import com.lead_management_system.entities.enums.LeadStatus;
 
 @Entity
 @Table(name = "restaurant_leads")

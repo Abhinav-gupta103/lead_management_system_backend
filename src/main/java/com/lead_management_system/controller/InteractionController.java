@@ -1,8 +1,11 @@
-package com.lead_management_system.Interaction;
+package com.lead_management_system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.lead_management_system.Service.InteractionService;
+import com.lead_management_system.entities.Interaction;
 
 import java.util.List;
 

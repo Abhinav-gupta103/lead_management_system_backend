@@ -1,6 +1,8 @@
-package com.lead_management_system.Interaction;
+package com.lead_management_system.Service;
 
 import java.util.List;
+
+import com.lead_management_system.entities.Interaction;
 
 public interface InteractionService {
     Interaction addInteraction(Interaction interaction, Long restaurantId);

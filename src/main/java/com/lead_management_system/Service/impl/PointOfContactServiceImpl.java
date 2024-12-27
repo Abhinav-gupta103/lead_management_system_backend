@@ -1,13 +1,13 @@
-package com.lead_management_system.PointOfContact.impl;
+package com.lead_management_system.Service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lead_management_system.PointOfContact.PointOfContact;
-import com.lead_management_system.PointOfContact.PointOfContactRepository;
-import com.lead_management_system.PointOfContact.PointOfContactService;
-import com.lead_management_system.RestaurantLeads.RestaurantLeads;
-import com.lead_management_system.RestaurantLeads.RestaurantLeadsRepository;
+import com.lead_management_system.Service.PointOfContactService;
+import com.lead_management_system.entities.PointOfContact;
+import com.lead_management_system.entities.RestaurantLeads;
+import com.lead_management_system.repository.PointOfContactRepository;
+import com.lead_management_system.repository.RestaurantLeadsRepository;
 
 import java.util.List;
 

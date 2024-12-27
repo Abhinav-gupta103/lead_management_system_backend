@@ -1,13 +1,13 @@
-package com.lead_management_system.Performance.impl;
+package com.lead_management_system.Service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.lead_management_system.Interaction.Interaction;
-import com.lead_management_system.Interaction.InteractionService;
-import com.lead_management_system.Performance.PerformanceService;
-import com.lead_management_system.Performance.dto.RestaurantPerformanceDTO;
-import com.lead_management_system.RestaurantLeads.RestaurantLeads;
-import com.lead_management_system.RestaurantLeads.RestaurantLeadsService;
+import com.lead_management_system.Service.InteractionService;
+import com.lead_management_system.Service.PerformanceService;
+import com.lead_management_system.Service.RestaurantLeadsService;
+import com.lead_management_system.entities.Interaction;
+import com.lead_management_system.entities.RestaurantLeads;
+import com.lead_management_system.entities.dto.RestaurantPerformanceDTO;
 
 import java.util.List;
 

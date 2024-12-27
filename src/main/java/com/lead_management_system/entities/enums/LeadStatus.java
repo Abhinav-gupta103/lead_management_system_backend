@@ -1,4 +1,4 @@
-package com.lead_management_system.RestaurantLeads;
+package com.lead_management_system.entities.enums;
 
 public enum LeadStatus {
     NEW,

@@ -1,13 +1,13 @@
-package com.lead_management_system.Interaction.impl;
+package com.lead_management_system.Service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lead_management_system.Interaction.Interaction;
-import com.lead_management_system.Interaction.InteractionRepository;
-import com.lead_management_system.Interaction.InteractionService;
-import com.lead_management_system.RestaurantLeads.RestaurantLeads;
-import com.lead_management_system.RestaurantLeads.RestaurantLeadsRepository;
+import com.lead_management_system.Service.InteractionService;
+import com.lead_management_system.entities.Interaction;
+import com.lead_management_system.entities.RestaurantLeads;
+import com.lead_management_system.repository.InteractionRepository;
+import com.lead_management_system.repository.RestaurantLeadsRepository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.lead_management_system.RestaurantLeads.impl;
+package com.lead_management_system.Service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lead_management_system.RestaurantLeads.LeadStatus;
-import com.lead_management_system.RestaurantLeads.RestaurantLeads;
-import com.lead_management_system.RestaurantLeads.RestaurantLeadsRepository;
-import com.lead_management_system.RestaurantLeads.RestaurantLeadsService;
+import com.lead_management_system.entities.enums.LeadStatus;
+import com.lead_management_system.Service.RestaurantLeadsService;
+import com.lead_management_system.entities.RestaurantLeads;
+import com.lead_management_system.repository.RestaurantLeadsRepository;
 
 @Service
 public class RestaurantLeadsServiceImpl implements RestaurantLeadsService {

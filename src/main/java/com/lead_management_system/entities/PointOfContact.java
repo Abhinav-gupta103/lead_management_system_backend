@@ -1,7 +1,6 @@
-package com.lead_management_system.PointOfContact;
+package com.lead_management_system.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lead_management_system.RestaurantLeads.RestaurantLeads;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package com.lead_management_system.Performance;
+package com.lead_management_system.Service;
 
 import java.util.List;
 
-import com.lead_management_system.Performance.dto.RestaurantPerformanceDTO;
+import com.lead_management_system.entities.dto.RestaurantPerformanceDTO;
 
 public interface PerformanceService {
     List<RestaurantPerformanceDTO> getRestaurantPerformance();

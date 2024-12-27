@@ -1,9 +1,8 @@
-package com.lead_management_system.Performance.dto;
+package com.lead_management_system.entities.dto;
 
 import java.time.LocalDateTime;
 
-import com.lead_management_system.RestaurantLeads.LeadStatus;
-
+import com.lead_management_system.entities.enums.LeadStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

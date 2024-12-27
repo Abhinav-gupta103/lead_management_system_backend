@@ -1,8 +1,9 @@
-package com.lead_management_system.Performance;
+package com.lead_management_system.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.lead_management_system.Performance.dto.RestaurantPerformanceDTO;
+import com.lead_management_system.Service.PerformanceService;
+import com.lead_management_system.entities.dto.RestaurantPerformanceDTO;
 
 import java.util.List;
 

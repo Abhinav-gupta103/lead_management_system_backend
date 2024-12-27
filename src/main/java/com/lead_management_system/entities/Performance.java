@@ -1,6 +1,4 @@
-package com.lead_management_system.Performance;
-
-import com.lead_management_system.RestaurantLeads.RestaurantLeads;
+package com.lead_management_system.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

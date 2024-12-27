@@ -1,6 +1,8 @@
-package com.lead_management_system.Interaction;
+package com.lead_management_system.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.lead_management_system.entities.Interaction;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.lead_management_system.Interaction;
+package com.lead_management_system.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lead_management_system.RestaurantLeads.RestaurantLeads;
 
 @Entity
 @Table(name = "interactions")
