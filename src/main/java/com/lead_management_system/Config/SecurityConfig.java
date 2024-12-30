@@ -1,90 +1,70 @@
 package com.lead_management_system.Config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.lead_management_system.jwt.AuthEntryPointJwt;
-import com.lead_management_system.jwt.AuthTokenFilter;
-
-import javax.sql.DataSource;
+import com.lead_management_system.Service.impl.UserDetailsServiceImpl;
+import com.lead_management_system.filter.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 public class SecurityConfig {
 
-    @Autowired
-    DataSource dataSource;
+    private final UserDetailsServiceImpl userDetailsServiceImp;
 
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
+    private final CustomLogoutHandler logoutHandler;
+
+    public SecurityConfig(UserDetailsServiceImpl userDetailsServiceImp,
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            CustomLogoutHandler logoutHandler) {
+        this.userDetailsServiceImp = userDetailsServiceImp;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.logoutHandler = logoutHandler;
     }
 
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.cors();
-        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("api/signin").permitAll()
-                .anyRequest().authenticated());
-        http.sessionManagement(
-                session -> session.sessionCreationPolicy(
-                        SessionCreationPolicy.STATELESS));
-        http.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.headers(headers -> headers
-                .frameOptions(frameOptions -> frameOptions
-                        .sameOrigin()));
-        http.csrf(csrf -> csrf.disable());
-        http.addFilterBefore(authenticationJwtTokenFilter(),
-                UsernamePasswordAuthenticationFilter.class);
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(
+                        req -> req.requestMatchers("/api/login/**", "/api/register/**", "/api/refresh_token/**")
+                                .permitAll()
+                                .requestMatchers("/api/admin_only/**").hasAuthority("ADMIN")
+                                .anyRequest()
+                                .authenticated())
+                .userDetailsService(userDetailsServiceImp)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(
+                        e -> e.accessDeniedHandler(
+                                (request, response, accessDeniedException) -> response.setStatus(403))
+                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+                .logout(l -> l
+                        .logoutUrl("/logout")
+                        .addLogoutHandler(logoutHandler)
+                        .logoutSuccessHandler(
+                                (request, response, authentication) -> SecurityContextHolder.clearContext()))
+                .build();
 
-        return http.build();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
-    }
-
-    @Bean
-    public CommandLineRunner initData(UserDetailsService userDetailsService) {
-        return args -> {
-            JdbcUserDetailsManager manager = (JdbcUserDetailsManager) userDetailsService;
-            UserDetails user1 = User.withUsername("user1")
-                    .password(passwordEncoder().encode("password1"))
-                    .roles("USER")
-                    .build();
-            UserDetails admin = User.withUsername("admin")
-                    .password(passwordEncoder().encode("adminPass"))
-                    .roles("ADMIN")
-                    .build();
-
-            JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-            userDetailsManager.createUser(user1);
-            userDetailsManager.createUser(admin);
-        };
     }
 
     @Bean
@@ -93,8 +73,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
-        return builder.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Bean
