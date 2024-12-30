@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lead_management_system.Service.InteractionService;
+import com.lead_management_system.Service.RestaurantLeadsService;
 import com.lead_management_system.entities.Interaction;
+import com.lead_management_system.entities.PointOfContact;
 import com.lead_management_system.entities.RestaurantLeads;
 import com.lead_management_system.repository.InteractionRepository;
-import com.lead_management_system.repository.RestaurantLeadsRepository;
+import com.lead_management_system.repository.PointOfContactRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,13 +21,17 @@ public class InteractionServiceImpl implements InteractionService {
     private InteractionRepository interactionRepository;
 
     @Autowired
-    private RestaurantLeadsRepository leadsRepository;
+    private PointOfContactRepository pointOfContactRepository;
+
+    @Autowired
+    private RestaurantLeadsService restaurantLeadsService;
 
     @Override
-    public Interaction addInteraction(Interaction interaction, Long restaurantId) {
-        RestaurantLeads restaurant = leadsRepository.findById(restaurantId)
-                .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + restaurantId));
-        interaction.setRestaurant(restaurant);
+    public Interaction addInteraction(Interaction interaction, Long pointOfContactId) {
+        PointOfContact pointOfContact = pointOfContactRepository.findById(
+                pointOfContactId)
+                .orElseThrow(() -> new RuntimeException("Point of contact not found with id: " + pointOfContactId));
+        interaction.setPointOfContact(pointOfContact);
         return interactionRepository.save(interaction);
     }
 
@@ -39,7 +46,10 @@ public class InteractionServiceImpl implements InteractionService {
 
     @Override
     public List<Interaction> getInteractionsByRestaurantId(Long restaurantId) {
-        return interactionRepository.findByRestaurantId(restaurantId);
+        RestaurantLeads restaurantLead = restaurantLeadsService.getLeadById(restaurantId);
+        System.out.println(restaurantLead.getPointsOfContact());
+        List<Interaction> interactions = new ArrayList<>();
+        return interactions;
     }
 
     @Override
@@ -56,5 +66,10 @@ public class InteractionServiceImpl implements InteractionService {
     @Override
     public void deleteInteraction(Long id) {
         interactionRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Interaction> getInteractionsByPointOfContactId(Long pointOfContactId) {
+        return interactionRepository.findByPointOfContactId(pointOfContactId);
     }
 }

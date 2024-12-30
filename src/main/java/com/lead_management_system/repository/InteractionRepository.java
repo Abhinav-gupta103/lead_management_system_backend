@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface InteractionRepository extends JpaRepository<Interaction, Long> {
 
-    List<Interaction> findByRestaurantId(Long restaurantId);
+    List<Interaction> findByPointOfContactId(Long pointOfContactId);
+
 }

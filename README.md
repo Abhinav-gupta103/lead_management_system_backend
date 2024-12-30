@@ -24,11 +24,12 @@ This is a demo project for a Lead Management System built using Spring Boot. The
                 com/
                     lead_management_system/
                         Config/
-                        Interaction/
-                        jwt/
-                        Performance/
-                        PointOfContact/
-                        RestaurantLeads/
+                        controller/
+                        entities/
+                        filter/
+                        repository/
+                        Service/
+                            impl/
                         LeadManagementSystemApplication.java
                         GreetingsController.java
             resources/

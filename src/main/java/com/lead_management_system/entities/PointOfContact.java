@@ -1,5 +1,7 @@
 package com.lead_management_system.entities;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -32,4 +34,7 @@ public class PointOfContact {
     @JsonIgnore
     private RestaurantLeads restaurant;
 
+    @OneToMany(mappedBy = "pointOfContact", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Interaction> interactions;
 }

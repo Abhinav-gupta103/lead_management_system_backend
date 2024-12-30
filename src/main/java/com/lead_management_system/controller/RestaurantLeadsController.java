@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lead_management_system.Service.RestaurantLeadsService;
+import com.lead_management_system.entities.Interaction;
 import com.lead_management_system.entities.RestaurantLeads;
 import com.lead_management_system.entities.enums.LeadStatus;
 
@@ -44,6 +45,12 @@ public class RestaurantLeadsController {
     @GetMapping("/{id}")
     public ResponseEntity<RestaurantLeads> getLeadById(@PathVariable Long id) {
         return ResponseEntity.ok(leadsService.getLeadById(id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Interaction>> getInteractionsOfLeadById(@PathVariable Long id) {
+        return ResponseEntity.ok(leadsService.getInteractionsOfLeadById(id));
+
     }
 
     @DeleteMapping("/{id}")

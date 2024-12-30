@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.lead_management_system.entities.enums.LeadStatus;
 import com.lead_management_system.Service.RestaurantLeadsService;
+import com.lead_management_system.entities.Interaction;
+import com.lead_management_system.entities.PointOfContact;
 import com.lead_management_system.entities.RestaurantLeads;
 import com.lead_management_system.repository.RestaurantLeadsRepository;
 
@@ -55,5 +57,16 @@ public class RestaurantLeadsServiceImpl implements RestaurantLeadsService {
     @Override
     public List<RestaurantLeads> getLeadsByStatus(LeadStatus status) {
         return leadsRepository.findByLeadStatus(status);
+    }
+
+    @Override
+    public List<Interaction> getInteractionsOfLeadById(Long id) {
+        RestaurantLeads lead = leadsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Lead not found with id: " + id));
+        List<PointOfContact> pointOfContacts = lead.getPointsOfContact();
+        return pointOfContacts.stream()
+                .map(PointOfContact::getInteractions)
+                .flatMap(List::stream)
+                .toList();
     }
 }

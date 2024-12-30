@@ -16,17 +16,17 @@ public class InteractionController {
     @Autowired
     private InteractionService interactionService;
 
-    @PostMapping("/{restaurantId}")
+    @PostMapping("/{pointOfContactId}")
     public ResponseEntity<Interaction> addInteraction(
-            @PathVariable Long restaurantId,
+            @PathVariable Long pointOfContactId,
             @RequestBody Interaction interaction) {
-        return ResponseEntity.ok(interactionService.addInteraction(interaction, restaurantId));
+        return ResponseEntity.ok(interactionService.addInteraction(interaction, pointOfContactId));
     }
 
-    @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<Interaction>> getInteractionsByRestaurantId(
-            @PathVariable Long restaurantId) {
-        return ResponseEntity.ok(interactionService.getInteractionsByRestaurantId(restaurantId));
+    @GetMapping("/restaurant/{pointOfContactId}")
+    public ResponseEntity<List<Interaction>> getInteractionsByPointOfContactId(
+            @PathVariable Long pointOfContactId) {
+        return ResponseEntity.ok(interactionService.getInteractionsByPointOfContactId(pointOfContactId));
     }
 
     @GetMapping

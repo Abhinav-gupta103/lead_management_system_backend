@@ -36,10 +36,6 @@ public class RestaurantLeads {
     @JsonIgnore
     private List<PointOfContact> pointsOfContact;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<Interaction> interactions;
-
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

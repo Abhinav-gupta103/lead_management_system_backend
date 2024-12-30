@@ -16,4 +16,6 @@ public interface InteractionService {
     Interaction updateInteraction(Long id, Interaction updatedInteraction);
 
     void deleteInteraction(Long id);
+
+    List<Interaction> getInteractionsByPointOfContactId(Long pointOfContactId);
 }

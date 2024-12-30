@@ -20,9 +20,9 @@ public class Interaction {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @JoinColumn(name = "point_of_contact_id", nullable = false)
     @JsonIgnore
-    private RestaurantLeads restaurant;
+    private PointOfContact pointOfContact;
 
     @Column(nullable = false)
     private String interactionType;

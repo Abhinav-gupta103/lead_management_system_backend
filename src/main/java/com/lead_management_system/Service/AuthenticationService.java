@@ -107,7 +107,6 @@ public class AuthenticationService {
     }
 
     public ResponseEntity refreshToken(HttpServletRequest request, HttpServletResponse response) {
-        // extract the token from authorization header
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
